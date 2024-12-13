@@ -7,7 +7,11 @@
  * trimProperties({ name: '  jane  ' }) // returns a new object { name: 'jane' }
  */
 function trimProperties(obj) {
-  // ✨ implement
+  const result = {}
+  for (const o in obj) {
+    result[o] = obj[o].trim()
+  }
+  return result
 }
 
 /**
@@ -19,7 +23,10 @@ function trimProperties(obj) {
  * trimPropertiesMutation({ name: '  jane  ' }) // returns the object mutated in place { name: 'jane' }
  */
 function trimPropertiesMutation(obj) {
-  // ✨ implement
+  for (const o in obj) {
+    obj[o] = obj[o].trim()
+  }
+  return obj
 }
 
 /**
@@ -31,7 +38,11 @@ function trimPropertiesMutation(obj) {
  * findLargestInteger([{ integer: 1 }, { integer: 3 }, { integer: 2 }]) // returns 3
  */
 function findLargestInteger(integers) {
-  // ✨ implement
+  let max = -Infinity
+  integers.forEach((obj) => {
+    max = obj.integer > max ? obj.integer : max
+  })
+  return max
 }
 
 class Counter {
@@ -41,6 +52,7 @@ class Counter {
    */
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    this.count = initialNumber
   }
 
   /**
@@ -57,6 +69,11 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    if (this.count > 0) {
+      return this.count--
+    } else {
+      return 0
+    }
   }
 }
 
@@ -66,6 +83,8 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasonName = ["summer", "fall", "winter", "spring"]
+    this.count = 0
   }
 
   /**
@@ -82,6 +101,9 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    const nextSeason = this.seasonName[this.count]
+    this.count = (this.count + 1) % 4
+    return nextSeason
   }
 }
 
@@ -96,6 +118,9 @@ class Car {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
+    this.name = name
+    this.tankSize = tankSize
+    this.mpg = mpg
   }
 
   /**
@@ -113,6 +138,11 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+    const maxDis = this.tank * this.mpg
+    const driveDis = Math.min(distance, maxDis)
+    this.odometer += driveDis
+    this.tank -= driveDis / this.mpg
+    return this.odometer
   }
 
   /**
@@ -128,6 +158,8 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    this.tank = Math.min(this.tank + gallons, this.tankSize)
+    return this.tank * this.mpg
   }
 }
 
@@ -146,6 +178,11 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   // ✨ implement
+  if (number % 2 === 0) {
+    return true
+  } else {
+    return false
+  }
 }
 
 module.exports = {
